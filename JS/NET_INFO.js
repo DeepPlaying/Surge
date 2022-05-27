@@ -27,7 +27,7 @@ $httpClient.get(url, function(error, response, data){
     let datacentre = jsonData.org
   body = {
     title: rootName,
-    content: `IP信息：${ip}\n` + `运营商：${isp}\n` + `数据中心：${datacentre}\n` + `地理位置：${country}-${city}`,
+    content: `IP信息：  ${ip}\n` + `运营商：  ${isp}\n` + `数据中心：${datacentre}\n` + `地理位置：${country} - ${city}`,
     icon: params.icon,
     "icon-color":params.color
   }

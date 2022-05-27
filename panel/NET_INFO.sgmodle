@@ -1,0 +1,9 @@
+#!name=网络信息面板
+
+[Script]
+NET-INFO = type=generic, timeout=10, script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/NET_INFO.js, color=#9a7ff7&group=Proxy
+
+[Panel]
+NET-INFO = script-name=NET-INFO, update-interval=1
+
+

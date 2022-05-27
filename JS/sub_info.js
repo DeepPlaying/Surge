@@ -14,7 +14,7 @@ let args = getArgs();
   let total = info.total;
   let expire = args.expire || info.expire;
   
-  let content = [`Used：${bytesToSize(used)} \n Free: ${bytesToSize(total-used)}`];
+  let content = [`Used：${bytesToSize(used)} | Free：${bytesToSize(total-used)}`];
 
 
   let now = new Date();

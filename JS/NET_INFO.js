@@ -2,7 +2,7 @@
 * 脚本综合@congcong大佬与@fishingworld大佬，参考文件地址：https://github.com/congcong0806/surge-list/blob/master/Script/ipcheck.js与https://github.com/fishingworld/something/blob/main/PanelScripts/net_info.js
 *感谢大佬们的智慧
 */
-
+;(async () => {
 let url = "http://ip-api.com/json/?lang=zh-CN"
 let params = getParams($argument)
 //获取根节点名
@@ -33,7 +33,7 @@ $httpClient.get(url, function(error, response, data){
   }
   $done(body);
 });
-
+})();
 
 function httpAPI(path = "", method = "GET", body = null) {
     return new Promise((resolve) => {

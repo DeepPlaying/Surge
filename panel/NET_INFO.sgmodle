@@ -4,15 +4,15 @@
 [Script]
 NET-INFO = type=generic, timeout=10, script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/NET_INFO.js, argument=icon=network&color=#5df891&group=Proxy
 
-配置重载=script-path=https://raw.githubusercontent.com/LucaLin233/Luca_Conf/main/Surge/JS/Reload.js,type=generic
+配置重载=script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/reload.js,type=generic
 
-刷新DNS = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js,argument=title=刷新DNS缓存&icon=repeat.circle.fill&color=#FF9F0A&server=false
+刷新DNS = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js,argument=title=Refresh DNS&icon=icloud.and.arrow.down&color=#FF9F0A&server=false
 
 
 [Panel]
 NET-INFO = script-name=NET-INFO, update-interval=1
 # 配置重载
-配置重载 = title=配置重载,content=配置重载,style=info,script-name=配置重载,update-interval=-1
+配置重载 = title=Reload Profile,content=Reload Profile,style=info,script-name=配置重载,update-interval=-1
 # 刷新DNS
 刷新DNS = script-name=刷新DNS,update-interval=1
 

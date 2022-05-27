@@ -22,7 +22,7 @@ $httpClient.get('http://ip-api.com/json/?lang=zh-CN', function (error, response,
     const jsonData = JSON.parse(data);
     $done({
       title:rootName,
-      content: `数据中心：${jsonData.org}\n` + `地理位置：${jsonData.country} - ${jsonData.city}\n` + `IP信息：  ${jsonData.query}\n` + `运营商：  ${jsonData.isp}`,
+      content: `数据中心：${jsonData.org}\n` + `地理位置：${jsonData.country} - ${jsonData.city}\n` + `IP信息：   ${jsonData.query}\n` + `运营商：   ${jsonData.isp}`,
       icon: params.icon,
 		  "icon-color":params.color
     });

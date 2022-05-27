@@ -1,9 +1,10 @@
 /**
-* 脚本综合@congcong大佬与@fishingworld大佬，参考文件地址：https://github.com/congcong0806/surge-list/blob/master/Script/ipcheck.js与https://github.com/fishingworld/something/blob/main/PanelScripts/net_info.js
-*感谢大佬们的智慧
+* 感谢@fishingworld大佬的智慧，参考文件地址：https://github.com/fishingworld/something/blob/main/PanelScripts/net_info.js
 */
 ;(async () => {
-let url = "http://ip-api.com/json/?lang=zh-CN"
+
+
+
 let params = getParams($argument)
 //获取根节点名
 let proxy = await httpAPI("/v1/policy_groups");
@@ -17,23 +18,18 @@ while(allGroup.includes(rootName)==true){
 	rootName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(rootName)+"")).policy;
 }
 
-$httpClient.get(url, function(error, response, data){
-    let jsonData = JSON.parse(data)
-    let country = jsonData.country
-    let emoji = getFlagEmoji(jsonData.countryCode)
-    let city = jsonData.city
-    let isp = jsonData.isp
-    let ip = jsonData.query
-    let datacentre = jsonData.org
-  body = {
-    title: rootName,
-    content: `数据中心：${datacentre}\n` + `地理位置：${country} - ${city}\n` + `IP信息：  ${ip}\n` + `运营商：  ${isp}` + ,
-    icon: params.icon,
-    "icon-color":params.color
-  }
-  $done(body);
-});
+$httpClient.get('http://ip-api.com/json/?lang=zh-CN', function (error, response, data) {
+    const jsonData = JSON.parse(data);
+    $done({
+      title:rootName,
+      content: `数据中心：${jsonData.org}\n` + `地理位置：${jsonData.country} - ${jsonData.city}\n` + `IP信息：  ${jsonData.query}\n` + `运营商：  ${jsonData.isp}`,
+      icon: params.icon,
+		  "icon-color":params.color
+    });
+  });
+
 })();
+
 
 function httpAPI(path = "", method = "GET", body = null) {
     return new Promise((resolve) => {
@@ -42,14 +38,6 @@ function httpAPI(path = "", method = "GET", body = null) {
         });
     });
 };
-
-function getFlagEmoji(countryCode) {
-    const codePoints = countryCode
-      .toUpperCase()
-      .split('')
-      .map(char =>  127397 + char.charCodeAt());
-    return String.fromCodePoint(...codePoints);
-}
 
 function getParams(param) {
   return Object.fromEntries(

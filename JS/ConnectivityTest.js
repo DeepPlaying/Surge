@@ -7,12 +7,20 @@
         if (arg.color) panel["icon-color"] = arg.color;
         if (arg.server == "false") showServer = false;
     }
-    let test = (await httpAPI("/v1/policies/test"), "GET") ;
+    let test = (await httpAPI("/v1/policy_groups/select?group_name=Proxy")) ;
     console.log(test);
     $done();
 })();
 
-function httpAPI(path = "", method = "GET", body = null) {
+function httpAPI1(path = "", method = "POST", body = null) {
+    return new Promise((resolve) => {
+        $httpAPI(method, path, body, (result) => {
+            resolve(result);
+        });
+    });
+}
+
+function httpAPI2(path = "", method = "GET", body = null) {
     return new Promise((resolve) => {
         $httpAPI(method, path, body, (result) => {
             resolve(result);

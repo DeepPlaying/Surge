@@ -36,7 +36,7 @@ async function test_youtube() {
         }
         Time = (new Date()).getTime() - startTime
         let delay = '5ms'
-        resolve(region)
+        resolve(delay)
       })
     })
   }

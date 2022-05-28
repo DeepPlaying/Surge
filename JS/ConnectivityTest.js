@@ -5,9 +5,7 @@ const REQUEST_HEADERS = {
 }
 
 !(async () => {
-    let panel = { title: "网络连通性测试" },
-        showServer = true,
-        dnsCache;
+    let panel = { title: "网络连通性测试" };
     if (typeof $argument != "undefined") {
         let arg = Object.fromEntries($argument.split("&").map((item) => item.split("=")));
         if (arg.title) panel.title = arg.title;
@@ -15,13 +13,10 @@ const REQUEST_HEADERS = {
         if (arg.color) panel["icon-color"] = arg.color;
         if (arg.server == "false") showServer = false;
     }
-    if (showServer) {
-        dnsCache = (await httpAPI("/v1/dns", "GET")).dnsCache;
-        dnsCache = [...new Set(dnsCache.map((d) => d.server))].toString().replace(/,/g, "\n");
-    }
+
     if ($trigger == "button") await httpAPI("/v1/dns/flush");
     let delay = ((await httpAPI("/v1/test/dns_delay")).delay * 1000).toFixed(0);
-    panel.content = `delay: ${delay}ms${dnsCache ? `\nserver:\n${dnsCache}` : ""}`;
+    panel.content = `delay: ${delay}ms`;
     $done(panel);
 })();
 

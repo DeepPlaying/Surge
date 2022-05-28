@@ -26,7 +26,7 @@ async function check_youtube() {
   let inner_check = () => {
     return new Promise((resolve) => {
       let option = {
-        url: 'https://www.baidu.com',
+        url: 'https://www.google.com/generate_204',
         headers: REQUEST_HEADERS,
       }
       startTime = Date.now()
@@ -40,7 +40,7 @@ async function check_youtube() {
   youtube_check_result =  'YouTube：' 
   await inner_check()
     .then((code) => {
-      Delay = (endTime-startTime)/2 +""
+      Delay = endTime-startTime + ""
       if (code === '1') {
         youtube_check_result += Delay + 'ms'
       }

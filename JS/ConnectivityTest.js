@@ -17,7 +17,7 @@ const REQUEST_HEADERS = {
     test();
     
     let time = endTime - startTime;
-    console.log(time);
+    console.log(startTime);
     $done();
 })();
 

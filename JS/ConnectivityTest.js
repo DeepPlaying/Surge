@@ -55,7 +55,19 @@ async function check_youtube_premium() {
     })
   }
 
-  let youtube_check_result = ' ' 
-  
+  let youtube_check_result = ''
+
+  await inner_check()
+    .then((code) => {
+      if (code === 'Not Available') {
+        youtube_check_result += '油管未解锁'
+      } else {
+        youtube_check_result += '油管解锁：' + code.toUpperCase()
+      }
+    })
+    .catch((error) => {
+      youtube_check_result += '检测失败'
+    })
+
   return youtube_check_result
 }

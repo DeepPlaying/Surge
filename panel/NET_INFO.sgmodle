@@ -8,6 +8,8 @@ NET-INFO = type=generic, timeout=10, script-path=https://raw.githubusercontent.c
 
 刷新DNS = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/flushDNS.js,argument=title=Flush DNS&icon=icloud.and.arrow.down&color=#FF9F0A&server=false
 
+测延迟 = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/ConnectivityTest.js,argument=title=Connectivity Test&icon=icloud.and.arrow.down&color=#FF9F0A&server=false
+
 
 [Panel]
 NET-INFO = script-name=NET-INFO, update-interval=1
@@ -16,4 +18,4 @@ NET-INFO = script-name=NET-INFO, update-interval=1
 # 刷新DNS
 刷新DNS = script-name=刷新DNS,update-interval=1
 
-
+测延迟 = script-name=测延迟,update-interval=1

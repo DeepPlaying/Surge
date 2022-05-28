@@ -13,9 +13,11 @@ const REQUEST_HEADERS = {
         if (arg.server == "false") showServer = false;
     }
 
-
+    const startTime = Date.now();
     test();
-    console.log(ping);
+    const endTime = Date.now();
+    let time = endTime - startTime;
+    console.log(time);
     $done();
 })();
 
@@ -44,8 +46,6 @@ function test() {
         'Accept-Language': 'en',
       },
     }
-    var ping = 0
-    setInterval(function(){ ping++; }, 1)
     $httpClient.get(option, function (error, response, data) {
       if (error != null || response.status !== 200) {
         reject('Error')

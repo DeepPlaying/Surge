@@ -3,7 +3,7 @@ const REQUEST_HEADERS = {
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
   'Accept-Language': 'en',
 }
-var startTime = Date.now()
+startTime = Date.now()
 console.log(startTime)
 
 ;(async () => {
@@ -40,11 +40,6 @@ async function check_youtube_premium() {
           return
         }
 
-        if (data.indexOf('Premium is not available in your country') !== -1) {
-          resolve('Not Available')
-          return
-        }
-
         let region = ''
         let re = new RegExp('"countryCode":"(.*?)"', 'gm')
         let result = re.exec(data)
@@ -60,19 +55,7 @@ async function check_youtube_premium() {
     })
   }
 
-  let youtube_check_result = ''
-
-  await inner_check()
-    .then((code) => {
-      if (code === 'Not Available') {
-        youtube_check_result += '油管未解锁'
-      } else {
-        youtube_check_result += '油管解锁：' + code.toUpperCase()
-      }
-    })
-    .catch((error) => {
-      youtube_check_result += '检测失败'
-    })
-
+  let youtube_check_result = 'YouTube：${endTime-startTime}ms' 
+  
   return youtube_check_result
 }

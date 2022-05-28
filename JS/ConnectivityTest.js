@@ -14,17 +14,41 @@ const REQUEST_HEADERS = {
         if (arg.server == "false") showServer = false;
     }
 
-    if ($trigger == "button") await httpAPI("/v1/dns/flush");
-    let delay = ((await httpAPI("/v1/test/dns_delay")).delay * 1000).toFixed(0);
-    panel.content = `delay: ${delay}ms`;
+    if ($trigger == "button") await httpAPI();
+    let delay = ((await httpAPI()).delay * 1000).toFixed(0);
+    panel.content = `Youtube: ${delay}ms`;
     $done(panel);
 })();
 
-function httpAPI(path = "", method = "POST", body = null) {
-    return new Promise((resolve) => {
-        $httpAPI(method, path, body, (result) => {
-            resolve(result);
-        });
-    });
+function httpapi() {
+    return new Promise((resolve, reject) => {
+      let option = {
+        url: 'https://www.youtube.com',
+        headers: REQUEST_HEADERS,
+      }
+      $httpClient.get(option, function (error, response, data) {
+        if (error != null || response.status !== 200) {
+          reject('Error')
+          return
+        }
+
+        if (data.indexOf('Premium is not available in your country') !== -1) {
+          resolve('Not Available')
+          return
+        }
+
+        let region = ''
+        let re = new RegExp('"countryCode":"(.*?)"', 'gm')
+        let result = re.exec(data)
+        if (result != null && result.length === 2) {
+          region = result[1]
+        } else if (data.indexOf('www.google.cn') !== -1) {
+          region = 'CN'
+        } else {
+          region = 'US'
+        }
+        resolve(region)
+      })
+    })
 }
 

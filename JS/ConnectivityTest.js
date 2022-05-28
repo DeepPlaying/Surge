@@ -37,7 +37,7 @@ async function test_youtube() {
     })
   }
 
-  youtube_test_result =  'YouTube: ' 
+  youtube_test_result =  'YouTube' + '\xa0\xa0' + ': '
   await inner_check()
     .then((code) => {
       youtube_Delay = youtube_endTime-youtube_startTime + ""
@@ -64,7 +64,7 @@ async function test_google() {
     })
   }
 
-  google_test_result =  'Google : ' 
+  google_test_result =  'Google' + '\xa0\xa0\xa0\xa0' + ': '
   await inner_check()
     .then((code) => {
       google_Delay = google_endTime-google_startTime + ""
@@ -91,7 +91,7 @@ async function test_github() {
     })
   }
 
-  github_test_result =  'Github : ' 
+  github_test_result =  'Github' + '\xa0\xa0\xa0\xa0' + ': '
   await inner_check()
     .then((code) => {
       github_Delay = github_endTime-github_startTime + ""

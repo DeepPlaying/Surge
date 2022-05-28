@@ -29,10 +29,15 @@ async function check_youtube() {
         headers: REQUEST_HEADERS,
       }
       ping = 0
-      $httpClient.get(option, function (error, response, data) {      
+      $httpClient.get(option, function (error, response, data) {
+        if (error != null || response.status !== 200) {
+          reject('Error')
+          return
+        }
       })
       let delay = ''
       delay = '${ping}ms$'
+      resolve(
     })
   }
 

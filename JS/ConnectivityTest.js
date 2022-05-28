@@ -24,29 +24,13 @@ const REQUEST_HEADERS = {
 
 async function check_youtube_premium() {
   let inner_check = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       let option = {
         url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
       }
       $httpClient.get(option, function (error, response, data) {
-
-        if (error != null || response.status !== 200) {
-          reject('Error')
-          return
-        }
-
-        let region = ''
-        let re = new RegExp('"countryCode":"(.*?)"', 'gm')
-        let result = re.exec(data)
-        if (result != null && result.length === 2) {
-          region = result[1]
-        } else if (data.indexOf('www.google.cn') !== -1) {
-          region = 'CN'
-        } else {
-          region = 'US'
-        }
-        resolve(region)
+        resolve('1')
       })
     })
   }
@@ -57,19 +41,10 @@ async function check_youtube_premium() {
     .then((code) => {
       endTime = Date.now()
       Delay = endTime-startTime +""
-      if (code === 'Not Available') {
-        youtube_check_result += Delay + 'ms'
-      } else {
+      if (code === '1') {
         youtube_check_result += Delay + 'ms'
       }
     })
-    .catch((error) => {
-      endTime = Date.now()
-      Delay = endTime-startTime +""
-      youtube_check_result += Delay + 'ms'
-    })
-  
-
   
   return youtube_check_result
 }

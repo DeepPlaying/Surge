@@ -21,34 +21,14 @@ const REQUEST_HEADERS = {
 })();
 
 function httpapi() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       let option = {
         url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
-      }
+      };
       $httpClient.get(option, function (error, response, data) {
-        if (error != null || response.status !== 200) {
-          reject('Error')
-          return
-        }
-
-        if (data.indexOf('Premium is not available in your country') !== -1) {
-          resolve('Not Available')
-          return
-        }
-
-        let region = ''
-        let re = new RegExp('"countryCode":"(.*?)"', 'gm')
-        let result = re.exec(data)
-        if (result != null && result.length === 2) {
-          region = result[1]
-        } else if (data.indexOf('www.google.cn') !== -1) {
-          region = 'CN'
-        } else {
-          region = 'US'
-        }
-        resolve(region)
-      })
-    })
+        resolve(data);
+      });
+    });
 }
 

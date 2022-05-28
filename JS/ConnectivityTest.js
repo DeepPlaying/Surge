@@ -40,7 +40,7 @@ async function check_youtube() {
   youtube_check_result =  'YouTube：' 
   await inner_check()
     .then((code) => {
-      Delay = endTime-startTime +""
+      Delay = (endTime-startTime)/2 +""
       if (code === '1') {
         youtube_check_result += Delay + 'ms'
       }

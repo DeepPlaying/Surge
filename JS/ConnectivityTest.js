@@ -14,7 +14,6 @@ const REQUEST_HEADERS = {
     }
 
     const startTime = Date.now();
-    test();
     console.log(startTime);
     $done();
 })();

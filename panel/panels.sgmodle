@@ -1,0 +1,21 @@
+#!name=Panels
+#!desc=DeepPlaying的自用surge面板
+
+[Script]
+NET_INFO = type=generic, timeout=10, script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/NET_INFO.js, argument=icon=network&color=#5df891&group=Proxy
+
+Connectivity_Test = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/ConnectivityTest.js,argument=title=Connectivity Test&icon=icloud.and.arrow.down&color=#FF9F0A&server=false
+
+Profile_Reload=script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/reload.js,type=generic
+
+flushDNS = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/flushDNS.js,argument=title=Flush DNS&icon=icloud.and.arrow.down&color=#FF9F0A&server=false
+
+[Panel]
+#网络综合信息
+NET_INFO = script-name=NET_INFO, update-interval=1
+#网络连通性测试
+Connectivity_Test = script-name=Connectivity_Test,update-interval=1
+# 配置重载
+Profile_Reload = title=Reload Profile,content=Reload Profile,style=info,script-name=Profile_Reload,update-interval=-1
+# 刷新DNS
+flushDNS = script-name=flushDNS,update-interval=1

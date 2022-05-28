@@ -1,5 +1,5 @@
 !(async () => {
-    let panel = { title: "Connectivity TestS" },
+    let panel = { title: "Connectivity Test" },
         showServer = true,
         dnsCache;
     if (typeof $argument != "undefined") {

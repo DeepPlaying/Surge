@@ -13,9 +13,8 @@ const REQUEST_HEADERS = {
         if (arg.server == "false") showServer = false;
     }
     var ping = 0;
-    setinterval(function(){ ping++; }, 1);
+    setInterval(function(){ ping++; }, 1);
     test();
-    console.log(ping);
     $done();
 })();
 
@@ -65,7 +64,9 @@ function test() {
       } else {
         region = 'US'
       }
+      
       resolve(region.toUpperCase())
     })
   })
+  console.log(ping);
 }

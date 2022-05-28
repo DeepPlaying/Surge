@@ -8,11 +8,11 @@ const REQUEST_HEADERS = {
   let panel_result = {
     title: '网络连通性测试',
     content: '',
-    icon: 'play.circle',
-    'icon-color': '#00BC12',
+    icon: 'wifi.circle',
+    'icon-color': '#05ddfa',
   }
 
-  await Promise.all([test_google(), test_youtube()])
+  await Promise.all([test_google(), test_youtube(), test_github()])
     .then((result) => {
       let content = result.join('\n')
       panel_result['content'] = content
@@ -74,4 +74,31 @@ async function test_google() {
     })
   
   return google_test_result
+}
+
+async function test_github() {
+  let inner_check = () => {
+    return new Promise((resolve) => {
+      let option = {
+        url: 'https://www.github.com',
+        headers: REQUEST_HEADERS,
+      }
+      github_startTime = Date.now()
+      $httpClient.post(option, function (error, response, data) {
+        github_endTime = Date.now()
+        resolve('1')
+      })
+    })
+  }
+
+  github_test_result =  'Github：' 
+  await inner_check()
+    .then((code) => {
+      github_Delay = github_endTime-github_startTime + ""
+      if (code === '1') {
+        github_test_result += github_Delay + 'ms'
+      }
+    })
+  
+  return github_test_result
 }

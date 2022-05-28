@@ -53,12 +53,9 @@ async function check_youtube_premium() {
 
   youtube_check_result =  'YouTube：' 
   startTime = Date.now()
-  console.log(startTime)
   await inner_check()
     .then((code) => {
       endTime = Date.now()
-      console.log(endTime)
-      console.log(endTime-startTime)
       Delay = endTime-startTime +""
       if (code === 'Not Available') {
         youtube_check_result += Delay + 'ms'
@@ -68,8 +65,6 @@ async function check_youtube_premium() {
     })
     .catch((error) => {
       endTime = Date.now()
-      console.log(endTime)
-      console.log(endTime-startTime)
       Delay = endTime-startTime +""
       youtube_check_result += Delay + 'ms'
     })

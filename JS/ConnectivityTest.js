@@ -12,7 +12,7 @@ const REQUEST_HEADERS = {
     'icon-color': '#00BC12',
   }
 
-  await Promise.all([test_youtube()])
+  await Promise.all([test_google()])
     .then((result) => {
       let content = result.join('   ')
       panel_result['content'] = content

@@ -31,6 +31,8 @@ async function check_youtube_premium() {
         headers: REQUEST_HEADERS,
       }
       $httpClient.get(option, function (error, response, data) {
+        const endTime = Date.now()
+        console.log(endTime)
         if (error != null || response.status !== 200) {
           reject('Error')
           return

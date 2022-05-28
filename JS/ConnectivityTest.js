@@ -3,8 +3,6 @@ const REQUEST_HEADERS = {
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
   'Accept-Language': 'en',
 }
-var startTime = Date.now()
-console.log(startTime)
 
 ;(async () => {
   let panel_result = {
@@ -32,10 +30,7 @@ async function check_youtube_premium() {
         headers: REQUEST_HEADERS,
       }
       $httpClient.get(option, function (error, response, data) {
-        var endTime = Date.now()
-        console.log(endTime)
-        console.log(endTime-startTime)
-        Delay = endTime-startTime +""
+
         if (error != null || response.status !== 200) {
           reject('Error')
           return
@@ -57,7 +52,8 @@ async function check_youtube_premium() {
   }
 
   let youtube_check_result =  'YouTube：' 
-
+  var startTime = Date.now()
+  console.log(startTime)
   await inner_check()
     .then((code) => {
       if (code === 'Not Available') {
@@ -69,7 +65,10 @@ async function check_youtube_premium() {
     .catch((error) => {
       youtube_check_result = youtube_check_result
     })
-
+  var endTime = Date.now()
+  console.log(endTime)
+  console.log(endTime-startTime)
+  Delay = endTime-startTime +""
   youtube_check_result += Delay + 'ms'
   return youtube_check_result
 }

@@ -6,12 +6,12 @@ const REQUEST_HEADERS = {
 
 ;(async () => {
   let panel_result = {
-    title: '流媒体解锁检测',
+    title: '网络连通性测试',
     content: '',
     icon: 'play.circle',
     'icon-color': '#00BC12',
   }
-  await Promise.all([check_youtube_premium()])
+  await Promise.all([test_youtube()])
     .then((result) => {
       let content = result.join('   ')
       panel_result['content'] = content
@@ -21,34 +21,21 @@ const REQUEST_HEADERS = {
     })
 })()
 
-async function check_youtube_premium() {
+async function test_youtube() {
   let inner_check = () => {
     return new Promise((resolve, reject) => {
       let option = {
-        url: 'https://www.youtube.com/premium',
+        url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
       }
+      startTime = (new Date()).getTime()
       $httpClient.get(option, function (error, response, data) {
         if (error != null || response.status !== 200) {
           reject('Error')
           return
         }
-
-        if (data.indexOf('Premium is not available in your country') !== -1) {
-          resolve('Not Available')
-          return
-        }
-
-        let region = ''
-        let re = new RegExp('"countryCode":"(.*?)"', 'gm')
-        let result = re.exec(data)
-        if (result != null && result.length === 2) {
-          region = result[1]
-        } else if (data.indexOf('www.google.cn') !== -1) {
-          region = 'CN'
-        } else {
-          region = 'US'
-        }
+        Time = (new Date()).getTime() - startTime
+        let delay = '5ms'
         resolve(region)
       })
     })
@@ -61,7 +48,7 @@ async function check_youtube_premium() {
       if (code === 'Not Available') {
         youtube_check_result += '油管未解锁'
       } else {
-        youtube_check_result += '油管解锁：' + code.toUpperCase()
+        youtube_check_result += '油管解锁：' + delay
       }
     })
     .catch((error) => {

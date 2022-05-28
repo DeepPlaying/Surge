@@ -91,7 +91,7 @@ async function test_github() {
     })
   }
 
-  github_test_result =  'Github' + '\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + ': '
+  github_test_result =  'Github' + '\xa0\xa0\xa0\xa0\xa0' + ': '
   await inner_check()
     .then((code) => {
       github_Delay = github_endTime-github_startTime + ""

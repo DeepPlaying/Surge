@@ -26,7 +26,7 @@ async function check_youtube() {
   let inner_check = () => {
     return new Promise((resolve) => {
       let option = {
-        url: 'https://www.youtube.com',
+        url: 'https://www.baidu.com',
         headers: REQUEST_HEADERS,
       }
       startTime = Date.now()

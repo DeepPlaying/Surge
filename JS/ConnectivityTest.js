@@ -29,6 +29,7 @@ async function check_youtube() {
         url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
       }
+      startTime = Date.now()
       $httpClient.get(option, function (error, response, data) {
         endTime = Date.now()
         resolve('1')
@@ -37,7 +38,6 @@ async function check_youtube() {
   }
 
   youtube_check_result =  'YouTube：' 
-  startTime = Date.now()
   await inner_check()
     .then((code) => {
       Delay = endTime-startTime +""

@@ -2,70 +2,73 @@ const REQUEST_HEADERS = {
   'User-Agent':
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
   'Accept-Language': 'en',
-};
-!(async () => {
-    let panel = { title: "Flush DNS" };
-    if (typeof $argument != "undefined") {
-        let arg = Object.fromEntries($argument.split("&").map((item) => item.split("=")));
-        if (arg.title) panel.title = arg.title;
-        if (arg.icon) panel.icon = arg.icon;
-        if (arg.color) panel["icon-color"] = arg.color;
-        if (arg.server == "false") showServer = false;
-    }
-
-    const startTime = Date.now();
-    console.log(startTime);
-    $done();
-})();
-
-function httpAPI1(path = "", method = "POST", body = null) {
-    return new Promise((resolve) => {
-        $httpAPI(method, path, body, (result) => {
-            resolve(result);
-        });
-    });
 }
 
-function httpAPI2(path = "", method = "GET", body = null) {
-    return new Promise((resolve) => {
-        $httpAPI(method, path, body, (result) => {
-            resolve(result);
-        });
-    });
-}
-
-function test() {
-  return new Promise((resolve, reject) => {
-    let option = {
-      url: BASE_URL,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
-        'Accept-Language': 'en',
-      },
-    }
-    $httpClient.get(option, function (error, response, data) {
-      if (error != null || response.status !== 200) {
-        reject('Error')
-        return
-      }
-
-      if (data.indexOf('Premium is not available in your country') !== -1) {
-        reject('Not Available')
-        return
-      }
-
-      let region = ''
-      let re = new RegExp('"countryCode":"(.*?)"', 'gm')
-      let result = re.exec(data)
-      if (result != null && result.length === 2) {
-        region = result[1]
-      } else if (data.indexOf('www.google.cn') !== -1) {
-        region = 'CN'
-      } else {
-        region = 'US'
-      }
-      resolve(region.toUpperCase())
+;(async () => {
+  let panel_result = {
+    title: '网络连通性测试',
+    content: '',
+    icon: 'play.circle',
+    'icon-color': '#00BC12',
+  }
+  const startTime = Date.now()
+  console.log(startTime)
+  await Promise.all([check_youtube_premium()])
+    .then((result) => {
+      let content = result.join('   ')
+      panel_result['content'] = content
     })
-    
-  })
+    .finally(() => {
+      $done(panel_result)
+    })
+})()
+
+async function check_youtube_premium() {
+  let inner_check = () => {
+    return new Promise((resolve, reject) => {
+      let option = {
+        url: 'https://www.youtube.com/premium',
+        headers: REQUEST_HEADERS,
+      }
+      $httpClient.get(option, function (error, response, data) {
+        if (error != null || response.status !== 200) {
+          reject('Error')
+          return
+        }
+
+        if (data.indexOf('Premium is not available in your country') !== -1) {
+          resolve('Not Available')
+          return
+        }
+
+        let region = ''
+        let re = new RegExp('"countryCode":"(.*?)"', 'gm')
+        let result = re.exec(data)
+        if (result != null && result.length === 2) {
+          region = result[1]
+        } else if (data.indexOf('www.google.cn') !== -1) {
+          region = 'CN'
+        } else {
+          region = 'US'
+        }
+        resolve(region)
+      })
+    })
+  }
+
+  let youtube_check_result = ''
+
+  await inner_check()
+    .then((code) => {
+      if (code === 'Not Available') {
+        youtube_check_result += '油管未解锁'
+      } else {
+        youtube_check_result += '油管解锁：' + code.toUpperCase()
+      }
+    })
+    .catch((error) => {
+      youtube_check_result += '检测失败'
+    })
+
+  return youtube_check_result
 }

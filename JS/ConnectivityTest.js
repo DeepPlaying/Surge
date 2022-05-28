@@ -3,7 +3,7 @@ const REQUEST_HEADERS = {
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
   'Accept-Language': 'en',
 }
-startTime = Date.now()
+var startTime = Date.now()
 console.log(startTime)
 
 ;(async () => {
@@ -55,7 +55,7 @@ async function check_youtube_premium() {
     })
   }
 
-  let youtube_check_result = 'YouTube：${endTime-startTime}ms' 
+  let youtube_check_result = ' ' 
   
   return youtube_check_result
 }

@@ -14,7 +14,7 @@ const REQUEST_HEADERS = {
 
   await Promise.all([test_google(), test_youtube()])
     .then((result) => {
-      let content = result.join('   ')
+      let content = result.join('\n')
       panel_result['content'] = content
     })
     .finally(() => {

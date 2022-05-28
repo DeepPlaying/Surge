@@ -12,7 +12,7 @@ const REQUEST_HEADERS = {
     'icon-color': '#00BC12',
   }
 
-  await Promise.all([check_youtube_premium()])
+  await Promise.all([check_youtube()])
     .then((result) => {
       let content = result.join('   ')
       panel_result['content'] = content
@@ -22,7 +22,7 @@ const REQUEST_HEADERS = {
     })
 })()
 
-async function check_youtube_premium() {
+async function check_youtube() {
   let inner_check = () => {
     return new Promise((resolve) => {
       let option = {
@@ -30,6 +30,7 @@ async function check_youtube_premium() {
         headers: REQUEST_HEADERS,
       }
       $httpClient.get(option, function (error, response, data) {
+        endTime = Date.now()
         resolve('1')
       })
     })
@@ -39,7 +40,6 @@ async function check_youtube_premium() {
   startTime = Date.now()
   await inner_check()
     .then((code) => {
-      endTime = Date.now()
       Delay = endTime-startTime +""
       if (code === '1') {
         youtube_check_result += Delay + 'ms'

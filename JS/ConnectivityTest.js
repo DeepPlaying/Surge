@@ -12,8 +12,8 @@ const REQUEST_HEADERS = {
         if (arg.color) panel["icon-color"] = arg.color;
         if (arg.server == "false") showServer = false;
     }
-    var ping = 0;
-    setInterval(function(){ ping++; }, 1);
+
+
     test();
     console.log(ping);
     $done();
@@ -44,6 +44,8 @@ function test() {
         'Accept-Language': 'en',
       },
     }
+    var ping = 0
+    setInterval(function(){ ping++; }, 1)
     $httpClient.get(option, function (error, response, data) {
       if (error != null || response.status !== 200) {
         reject('Error')

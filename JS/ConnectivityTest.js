@@ -13,7 +13,7 @@ const REQUEST_HEADERS = {
         if (arg.server == "false") showServer = false;
     }
     var ping = 0;
-    setTimeout(function(){ ping++; }, 1);
+    setinterval(function(){ ping++; }, 1);
     test();
     console.log(ping);
     $done();

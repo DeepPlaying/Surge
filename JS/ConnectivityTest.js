@@ -15,6 +15,7 @@ const REQUEST_HEADERS = {
     var ping = 0;
     setInterval(function(){ ping++; }, 1);
     test();
+    console.log(ping);
     $done();
 })();
 
@@ -68,5 +69,4 @@ function test() {
       resolve(region.toUpperCase())
     })
   })
-  console.log(ping);
 }

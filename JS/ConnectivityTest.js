@@ -15,7 +15,7 @@ const REQUEST_HEADERS = {
     }
 
     if ($trigger == "button") await httpAPI();
-    let delay = ((await httpAPI()).delay * 1000).toFixed(0);
+    let delay = ((await httpapi()).delay * 1000).toFixed(0);
     panel.content = `Youtube: ${delay}ms`;
     $done(panel);
 })();

@@ -11,7 +11,7 @@ const REQUEST_HEADERS = {
     icon: 'play.circle',
     'icon-color': '#00BC12',
   }
-  const startTime = Date.now()
+  var startTime = Date.now()
   console.log(startTime)
   await Promise.all([check_youtube_premium()])
     .then((result) => {
@@ -31,8 +31,9 @@ async function check_youtube_premium() {
         headers: REQUEST_HEADERS,
       }
       $httpClient.get(option, function (error, response, data) {
-        const endTime = Date.now()
+        var endTime = Date.now()
         console.log(endTime)
+        console.log(endTime-startTime)
         if (error != null || response.status !== 200) {
           reject('Error')
           return

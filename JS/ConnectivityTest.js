@@ -4,43 +4,32 @@ const REQUEST_HEADERS = {
   'Accept-Language': 'en',
 }
 
-;(async () => {
-  let panel_result = {
-    title: '网络连通性测试',
-    content: '',
-    icon: 'play.circle',
-    'icon-color': '#00BC12',
-  }
-  await Promise.all([test_youtube()])
-    .then((result) => {
-      let content = result.join('   ')
-      panel_result['content'] = content
-    })
-    .finally(() => {
-      $done(panel_result)
-    })
-})()
+!(async () => {
+    let panel = { title: "网络连通性测试" },
+        showServer = true,
+        dnsCache;
+    if (typeof $argument != "undefined") {
+        let arg = Object.fromEntries($argument.split("&").map((item) => item.split("=")));
+        if (arg.title) panel.title = arg.title;
+        if (arg.icon) panel.icon = arg.icon;
+        if (arg.color) panel["icon-color"] = arg.color;
+        if (arg.server == "false") showServer = false;
+    }
+    if (showServer) {
+        dnsCache = (await httpAPI("/v1/dns", "GET")).dnsCache;
+        dnsCache = [...new Set(dnsCache.map((d) => d.server))].toString().replace(/,/g, "\n");
+    }
+    if ($trigger == "button") await httpAPI("/v1/dns/flush");
+    let delay = ((await httpAPI("/v1/test/dns_delay")).delay * 1000).toFixed(0);
+    panel.content = `delay: ${delay}ms${dnsCache ? `\nserver:\n${dnsCache}` : ""}`;
+    $done(panel);
+})();
 
-
-
-
-
-async function test_youtube() {
-  let inner_check = () => {
+function httpAPI(path = "", method = "POST", body = null) {
     return new Promise((resolve) => {
-      let option = {
-        url: 'https://www.youtube.com',
-        headers: REQUEST_HEADERS,
-      }
-      let startTime = (new Date()).getTime()
-      $httpClient.get(option, function (error, response, data) {
-      })
-      let Time = (new Date()).getTime() - startTime
-      var delay = '5ms'
-      resolve(delay)
-    })
-  }
-
-  var youtube_check_result = 'baidu：' + delay
-  return youtube_check_result
+        $httpAPI(method, path, body, (result) => {
+            resolve(result);
+        });
+    });
 }
+

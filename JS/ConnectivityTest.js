@@ -7,7 +7,7 @@
         if (arg.color) panel["icon-color"] = arg.color;
         if (arg.server == "false") showServer = false;
     }
-    let test = (await httpAPI("/v1/policy_groups/select?group_name=Proxy")) ;
+    let test = (await httpAPI2("/v1/policy_groups/select?group_name=Proxy")) ;
     console.log(test);
     $done();
 })();

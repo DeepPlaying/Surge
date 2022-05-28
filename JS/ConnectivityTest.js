@@ -33,6 +33,9 @@ async function check_youtube_premium() {
       }
       $httpClient.get(option, function (error, response, data) {
         var endTime = Date.now()
+        console.log(endTime)
+        console.log(endTime-startTime)
+        Delay = endTime-startTime +""
         if (error != null || response.status !== 200) {
           reject('Error')
           return
@@ -53,7 +56,7 @@ async function check_youtube_premium() {
     })
   }
 
-  let youtube_check_result = ''
+  let youtube_check_result =  'YouTube：' 
 
   await inner_check()
     .then((code) => {
@@ -62,9 +65,7 @@ async function check_youtube_premium() {
     .catch((error) => {
       
     })
-  console.log(endTime)
-  console.log(endTime-startTime)
-  Delay = endTime-startTime +""
-  youtube_check_result += 'YouTube：' + Delay + 'ms'
+
+  youtube_check_result += Delay + 'ms'
   return youtube_check_result
 }

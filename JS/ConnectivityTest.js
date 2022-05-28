@@ -27,52 +27,20 @@ const REQUEST_HEADERS = {
 
 async function test_youtube() {
   let inner_check = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       let option = {
         url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
       }
-      startTime = (new Date()).getTime()
+      let startTime = (new Date()).getTime()
       $httpClient.get(option, function (error, response, data) {
-        if (error != null || response.status !== 200) {
-          reject('Error')
-          return
-        }
-
-        if (data.indexOf('Premium is not available in your country') !== -1) {
-          resolve('Not Available')
-          return
-        }
-
-        let region = ''
-        let re = new RegExp('"countryCode":"(.*?)"', 'gm')
-        let result = re.exec(data)
-        if (result != null && result.length === 2) {
-          region = result[1]
-        } else if (data.indexOf('www.google.cn') !== -1) {
-          region = 'CN'
-        } else {
-          region = 'US'
-        }
-        Time = (new Date()).getTime() - startTime
-        let delay = '5ms'
-        resolve(region)
       })
+      let Time = (new Date()).getTime() - startTime
+      var delay = '5ms'
+      resolve(delay)
     })
   }
 
-  let youtube_check_result = ''
-
-  await inner_check()
-    .then((code) => {
-      if (code === 'Not Available') {
-        youtube_check_result += '油管未解锁'
-      } else {
-        youtube_check_result += '油管解锁：' + delay
-      }
-    })
-    .catch((error) => {
-      youtube_check_result += '油管解锁：' + delay
-    })
+  var youtube_check_result = 'baidu：' + delay
   return youtube_check_result
 }

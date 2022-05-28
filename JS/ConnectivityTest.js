@@ -30,7 +30,7 @@ async function check_youtube() {
         headers: REQUEST_HEADERS,
       }
       startTime = Date.now()
-      $httpClient.get(option, function (error, response, data) {
+      $httpClient.post(option, function (error, response, data) {
         endTime = Date.now()
         resolve('1')
       })

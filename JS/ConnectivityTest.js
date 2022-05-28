@@ -60,10 +60,14 @@ async function check_youtube_premium() {
 
   await inner_check()
     .then((code) => {
-      
+      if (code === 'Not Available') {
+        youtube_check_result = youtube_check_result
+      } else {
+        youtube_check_result = youtube_check_result
+      }
     })
     .catch((error) => {
-      
+      youtube_check_result = youtube_check_result
     })
 
   youtube_check_result += Delay + 'ms'

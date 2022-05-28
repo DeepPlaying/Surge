@@ -56,7 +56,7 @@ if(net=="en0") {
 
   $done({
       title:"流量统计 | "+netType,
-      content: network,
+      content: traffic,
 		icon: params.icon,
 		  "icon-color":params.color
     });

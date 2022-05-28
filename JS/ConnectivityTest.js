@@ -74,6 +74,5 @@ async function test_youtube() {
     .catch((error) => {
       youtube_check_result += '油管解锁：' + delay
     })
-  youtube_check_result += '油管解锁：' + delay
   return youtube_check_result
 }

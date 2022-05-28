@@ -7,7 +7,7 @@
         if (arg.color) panel["icon-color"] = arg.color;
         if (arg.server == "false") showServer = false;
     }
-    let test = (await httpAPI("/v1/policies/test")) 
+    let test = (await httpAPI("/v1/policies/test"), "GET") ;
     console.log(test);
     $done();
 })();

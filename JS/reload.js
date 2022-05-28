@@ -13,6 +13,6 @@ $httpAPI("POST", "/v1/profiles/reload", {}, data => {
         title: "Reload Profile",
         content: "Completed！",
         icon: "folder.circle",
-        "icon-color": "#FF9500",
+        "icon-color": "#1BA2F7",
      })
     });

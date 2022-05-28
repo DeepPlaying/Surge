@@ -9,9 +9,9 @@
         if (arg.color) panel["icon-color"] = arg.color;
         if (arg.server == "false") showServer = false;
     }
-    if ($trigger == "button") await httpAPI("https://www.baidu.com");
-    let delay = ((await httpAPI("https://www.baidu.com")).delay * 1000).toFixed(0);
-    panel.content = `Delay: ${delay}ms${dnsCache ? `\nserver:\n${dnsCache}` : ""}`;
+    if ($trigger == "button") delay = measureBW();
+    let delay = measureBW();
+    panel.content = `Delay: ${delay}ms`;
     $done(panel);
 })();
 
@@ -22,3 +22,15 @@ function httpAPI(path = "", method = "POST", body = null) {
         });
     });
 }
+
+function measureBW() {
+    var startTime, endTime, fileSize;
+
+    var xhr = new XMLHttpRequest();
+    startTime = Date.now();
+    xhr.open('GET', 'www.baidu.com', true);
+    endTime = Date.now();
+    delay = endTime - startTime;
+    return delay
+}
+

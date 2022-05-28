@@ -1,0 +1,9 @@
+#!name=ConnectivityTest
+#!desc=DeepPlaying的自用surge面板
+
+[Script]
+测延迟 = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/DeepPlaying/surge/main/JS/ConnectivityTest.js,argument=title=Connectivity Test&icon=icloud.and.arrow.down&color=#FF9F0A&server=false
+
+
+[Panel]
+测延迟 = script-name=测延迟,update-interval=1

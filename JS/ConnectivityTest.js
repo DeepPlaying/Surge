@@ -38,7 +38,7 @@ async function check_youtube() {
 
   let youtube_check_result = ''
 
-  youtube_check_result += '百度：' + delay
+  youtube_check_result += 'Youtube：' + delay
 
 
   return youtube_check_result

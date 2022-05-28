@@ -12,7 +12,7 @@ const REQUEST_HEADERS = {
     'icon-color': '#00BC12',
   }
 
-  await Promise.all([test_google()])
+  await Promise.all([test_youtube()])
     .then((result) => {
       let content = result.join('   ')
       panel_result['content'] = content
@@ -21,34 +21,6 @@ const REQUEST_HEADERS = {
       $done(panel_result)
     })
 })()
-
-async function test_google() {
-  let inner_check = () => {
-    return new Promise((resolve) => {
-      let option = {
-        url: 'https://www.google.com/generate_204',
-        headers: REQUEST_HEADERS,
-      }
-      google_startTime = Date.now()
-      $httpClient.post(option, function (error, response, data) {
-        google_endTime = Date.now()
-        resolve('1')
-      })
-    })
-  }
-
-  youtube_test_result =  'Google：' 
-  await inner_check()
-    .then((code) => {
-      google_Delay = google_endTime-google_startTime + ""
-      if (code === '1') {
-        google_test_result += google_Delay + 'ms'
-      }
-    })
-  
-  return google_test_result
-}
-
 
 async function test_youtube() {
   let inner_check = () => {

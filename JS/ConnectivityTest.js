@@ -15,8 +15,6 @@ const REQUEST_HEADERS = {
 
     const startTime = Date.now();
     test();
-    
-    let time = endTime - startTime;
     console.log(startTime);
     $done();
 })();
@@ -67,7 +65,6 @@ function test() {
       } else {
         region = 'US'
       }
-      const endTime = Date.now();
       resolve(region.toUpperCase())
     })
     

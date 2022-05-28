@@ -28,13 +28,14 @@ async function check_youtube_premium() {
   let inner_check = () => {
     return new Promise((resolve, reject) => {
       let option = {
-        url: 'https://www.youtube.com/premium',
+        url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
       }
       $httpClient.get(option, function (error, response, data) {
         var endTime = Date.now()
         console.log(endTime)
         console.log(endTime-startTime)
+        var Delay = endTime-startTime +""
         if (error != null || response.status !== 200) {
           reject('Error')
           return
@@ -59,14 +60,10 @@ async function check_youtube_premium() {
 
   await inner_check()
     .then((code) => {
-      if (code === 'Not Available') {
-        youtube_check_result += '油管未解锁'
-      } else {
-        youtube_check_result += '油管解锁：' + code.toUpperCase()
-      }
+      youtube_check_result += 'YouTube：' + Delay + 'ms'
     })
     .catch((error) => {
-      youtube_check_result += '检测失败'
+      youtube_check_result += 'YouTube：' + Delay + 'ms'
     })
 
   return youtube_check_result

@@ -8,7 +8,7 @@
         if (arg.server == "false") showServer = false;
     }
     let test = (await httpAPI1("/v1/policy_groups/test")) ;
-    console.log(test);
+    console.log(test.results);
     $done();
 })();
 

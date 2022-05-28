@@ -15,9 +15,10 @@
     }
     if ($trigger == "button") await httpAPI("/v1/dns/flush");
     let traffic = (await httpAPI("/v1/traffic"), "GET");
+    let interface = traffic.interface
     let delay = ((await httpAPI("/v1/test/dns_delay")).delay * 1000).toFixed(0);
     panel.content = `Delay: ${delay}ms`;
-    console.log(traffic);
+    console.log(interface);
     $done(panel);
 })();
 

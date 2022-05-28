@@ -12,7 +12,7 @@ const REQUEST_HEADERS = {
     'icon-color': '#00BC12',
   }
 
-  await Promise.all([test_google(),test_youtube()])
+  await Promise.all([test_google(), test_youtube()])
     .then((result) => {
       let content = result.join('   ')
       panel_result['content'] = content
@@ -42,7 +42,7 @@ async function test_google() {
     .then((code) => {
       google_Delay = google_endTime-google_startTime + ""
       if (code === '1') {
-        google_test_result += google_Delay + 'ms\n'
+        google_test_result += google_Delay + 'ms'
       }
     })
   

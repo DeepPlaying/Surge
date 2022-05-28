@@ -29,9 +29,9 @@ async function test_google() {
         url: 'https://www.google.com/generate_204',
         headers: REQUEST_HEADERS,
       }
-      startTime = Date.now()
+      google_startTime = Date.now()
       $httpClient.post(option, function (error, response, data) {
-        endTime = Date.now()
+        google_endTime = Date.now()
         resolve('1')
       })
     })
@@ -40,9 +40,9 @@ async function test_google() {
   youtube_test_result =  'Google：' 
   await inner_check()
     .then((code) => {
-      Delay = endTime-startTime + ""
+      google_Delay = google_endTime-google_startTime + ""
       if (code === '1') {
-        google_test_result += Delay + 'ms\n'
+        google_test_result += google_Delay + 'ms\n'
       }
     })
   
@@ -57,9 +57,9 @@ async function test_youtube() {
         url: 'https://www.youtube.com',
         headers: REQUEST_HEADERS,
       }
-      startTime = Date.now()
+      youtube_startTime = Date.now()
       $httpClient.post(option, function (error, response, data) {
-        endTime = Date.now()
+        youtube_endTime = Date.now()
         resolve('1')
       })
     })
@@ -68,9 +68,9 @@ async function test_youtube() {
   youtube_test_result =  'YouTube：' 
   await inner_check()
     .then((code) => {
-      Delay = endTime-startTime + ""
+      youtube_Delay = youtube_endTime-youtube_startTime + ""
       if (code === '1') {
-        youtube_test_result += Delay + 'ms'
+        youtube_test_result += youtube_Delay + 'ms'
       }
     })
   

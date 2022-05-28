@@ -6,7 +6,7 @@ const REQUEST_HEADERS = {
 
 ;(async () => {
   let panel_result = {
-    title: '网络连通性测试',
+    title: 'Network Connectivity Test',
     content: '',
     icon: 'wifi.circle',
     'icon-color': '#05ddfa',
@@ -37,12 +37,12 @@ async function test_youtube() {
     })
   }
 
-  youtube_test_result =  'YouTube：' 
+  youtube_test_result =  'YouTube: ' 
   await inner_check()
     .then((code) => {
       youtube_Delay = youtube_endTime-youtube_startTime + ""
       if (code === '1') {
-        youtube_test_result += youtube_Delay + 'ms'
+        youtube_test_result += youtube_Delay + ' ms'
       }
     })
   
@@ -64,12 +64,12 @@ async function test_google() {
     })
   }
 
-  google_test_result =  'Google：' 
+  google_test_result =  'Google : ' 
   await inner_check()
     .then((code) => {
       google_Delay = google_endTime-google_startTime + ""
       if (code === '1') {
-        google_test_result += google_Delay + 'ms'
+        google_test_result += google_Delay + ' ms'
       }
     })
   
@@ -91,14 +91,15 @@ async function test_github() {
     })
   }
 
-  github_test_result =  'Github：' 
+  github_test_result =  'Github : ' 
   await inner_check()
     .then((code) => {
       github_Delay = github_endTime-github_startTime + ""
       if (code === '1') {
-        github_test_result += github_Delay + 'ms'
+        github_test_result += github_Delay + ' ms'
       }
     })
   
   return github_test_result
 }
+
